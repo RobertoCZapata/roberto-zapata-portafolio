@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
   images: {
     remotePatterns: [
       {
@@ -14,6 +11,11 @@ const nextConfig = {
         hostname: 'avatars.githubusercontent.com',
       }
     ]
+  },
+  // Optimizaciones para Vercel
+  swcMinify: true,
+  experimental: {
+    optimizeCss: true
   }
 }
 
