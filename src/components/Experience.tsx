@@ -1,6 +1,6 @@
 'use client'
 
-import { Calendar, MapPin, ExternalLink, CheckCircle, Mail } from 'lucide-react'
+// Icons replaced with emoji/text
 import { experiences } from '@/data/personal'
 
 export default function Experience() {

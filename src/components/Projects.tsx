@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Github, ExternalLink, Calendar, Tag, CheckCircle } from 'lucide-react'
+// Icons replaced with emoji/text
 import { projects } from '@/data/personal'
 import type { Project } from '@/types'
 

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { skills } from '@/data/personal'
 import type { Skill } from '@/types'
+// Icons replaced with emoji/text
 
 export default function Skills() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all')

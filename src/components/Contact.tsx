@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Mail, Phone, MapPin, Linkedin, Github, ExternalLink, Send, CheckCircle } from 'lucide-react'
+// Icons replaced with emoji/text
 import { personalInfo } from '@/data/personal'
 
 export default function Contact() {

@@ -1,6 +1,6 @@
 'use client'
 
-import { Github, Linkedin, Mail, Heart, ArrowUp } from 'lucide-react'
+// Icons replaced with emoji/text
 import { personalInfo } from '@/data/personal'
 
 export default function Footer() {
