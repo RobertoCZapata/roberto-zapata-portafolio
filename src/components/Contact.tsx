@@ -3,6 +3,7 @@
 import { useState } from 'react'
 // Icons replaced with emoji/text
 import { personalInfo } from '@/data/personal'
+import { Mail, Phone, MapPin, Linkedin, Github, ExternalLink, CheckCircle, Send } from 'lucide-react'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
