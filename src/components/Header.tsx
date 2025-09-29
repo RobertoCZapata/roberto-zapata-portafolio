@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Menu, X, Download, ExternalLink } from 'lucide-react'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -67,15 +66,13 @@ export default function Header() {
               onClick={handleDownloadCV}
               className="inline-flex items-center px-4 py-2 border border-primary-600 text-primary-600 rounded-md hover:bg-primary-600 hover:text-white transition-all duration-200 text-sm font-medium"
             >
-              <Download className="w-4 h-4 mr-2" />
-              CV PDF
+              📄 CV PDF
             </button>
             <a
               href="#contact"
               className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-all duration-200 text-sm font-medium"
             >
-              Contactar
-              <ExternalLink className="w-4 h-4 ml-2" />
+              Contactar →
             </a>
           </div>
 
@@ -86,11 +83,7 @@ export default function Header() {
               className="bg-gray-200 inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-300 transition-colors"
               aria-expanded="false"
             >
-              {isMenuOpen ? (
-                <X className="block h-6 w-6" />
-              ) : (
-                <Menu className="block h-6 w-6" />
-              )}
+              {isMenuOpen ? "✕" : "☰"}
             </button>
           </div>
         </div>
@@ -115,16 +108,14 @@ export default function Header() {
                 onClick={handleDownloadCV}
                 className="inline-flex items-center justify-center px-4 py-2 border border-primary-600 text-primary-600 rounded-md hover:bg-primary-600 hover:text-white transition-all duration-200 text-sm font-medium"
               >
-                <Download className="w-4 h-4 mr-2" />
-                Descargar CV
+                📄 Descargar CV
               </button>
               <a
                 href="#contact"
                 className="inline-flex items-center justify-center px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-all duration-200 text-sm font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Contactar
-                <ExternalLink className="w-4 h-4 ml-2" />
+                Contactar →
               </a>
             </div>
           </div>
