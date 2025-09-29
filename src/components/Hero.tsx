@@ -1,51 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { ChevronDown, Github, Linkedin, Mail, MapPin, Calendar } from 'lucide-react'
 import { personalInfo } from '@/data/personal'
 
 export default function Hero() {
-  const [currentText, setCurrentText] = useState('')
-  const [isTyping, setIsTyping] = useState(true)
-
-  const titles = [
-    'Senior Frontend Developer',
-    'React.js Specialist',
-    'Testing Expert',
-    'English Proficient'
-  ]
-
-  useEffect(() => {
-    let titleIndex = 0
-    let charIndex = 0
-    let isDeleting = false
-
-    const typeEffect = () => {
-      const currentTitle = titles[titleIndex]
-
-      if (!isDeleting) {
-        setCurrentText(currentTitle.slice(0, charIndex + 1))
-        charIndex++
-
-        if (charIndex === currentTitle.length) {
-          setTimeout(() => {
-            isDeleting = true
-          }, 2000)
-        }
-      } else {
-        setCurrentText(currentTitle.slice(0, charIndex - 1))
-        charIndex--
-
-        if (charIndex === 0) {
-          isDeleting = false
-          titleIndex = (titleIndex + 1) % titles.length
-        }
-      }
-    }
-
-    const interval = setInterval(typeEffect, isDeleting ? 50 : 100)
-    return () => clearInterval(interval)
-  }, [titles])
 
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden">
@@ -74,8 +31,7 @@ export default function Hero() {
 
           <div className="h-16 mb-6">
             <p className="text-xl sm:text-2xl lg:text-3xl text-primary-600 font-medium">
-              {currentText}
-              <span className={`inline-block w-0.5 h-8 bg-primary-600 ml-1 ${isTyping ? 'animate-pulse' : ''}`}></span>
+              Senior Frontend Developer
             </p>
           </div>
 
@@ -87,11 +43,11 @@ export default function Hero() {
           {/* Key Stats */}
           <div className="flex flex-wrap justify-center gap-6 mb-10 text-sm text-gray-600">
             <div className="flex items-center">
-              <Calendar className="w-4 h-4 mr-2 text-primary-500" />
+              <span className="w-2 h-2 bg-primary-500 rounded-full mr-2"></span>
               <span>6+ años de experiencia</span>
             </div>
             <div className="flex items-center">
-              <MapPin className="w-4 h-4 mr-2 text-primary-500" />
+              <span className="w-2 h-2 bg-primary-500 rounded-full mr-2"></span>
               <span>Bucaramanga, Colombia</span>
             </div>
             <div className="flex items-center">
@@ -106,7 +62,6 @@ export default function Hero() {
               href="#contact"
               className="inline-flex items-center px-8 py-4 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all duration-300 shadow-lg hover:shadow-xl font-medium"
             >
-              <Mail className="w-5 h-5 mr-2" />
               Contactar
             </a>
             <a
@@ -123,26 +78,26 @@ export default function Hero() {
               href={personalInfo.contactInfo.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 text-gray-600 hover:text-gray-900 hover:bg-white rounded-full shadow-md hover:shadow-lg transition-all duration-300"
+              className="px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
               aria-label="GitHub Profile"
             >
-              <Github className="w-6 h-6" />
+              GitHub
             </a>
             <a
               href={personalInfo.contactInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 text-gray-600 hover:text-blue-600 hover:bg-white rounded-full shadow-md hover:shadow-lg transition-all duration-300"
+              className="px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
               aria-label="LinkedIn Profile"
             >
-              <Linkedin className="w-6 h-6" />
+              LinkedIn
             </a>
             <a
               href={`mailto:${personalInfo.contactInfo.email}`}
-              className="p-3 text-gray-600 hover:text-red-600 hover:bg-white rounded-full shadow-md hover:shadow-lg transition-all duration-300"
+              className="px-4 py-2 text-gray-600 hover:text-red-600 hover:bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
               aria-label="Email Contact"
             >
-              <Mail className="w-6 h-6" />
+              Email
             </a>
           </div>
 
@@ -153,7 +108,7 @@ export default function Hero() {
               className="inline-block p-2 text-gray-400 hover:text-primary-600 transition-colors"
               aria-label="Scroll to next section"
             >
-              <ChevronDown className="w-8 h-8" />
+              ↓
             </a>
           </div>
         </div>

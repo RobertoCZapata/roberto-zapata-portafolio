@@ -14,13 +14,11 @@
     "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
-    "@next/font": "^14.0.0",
-    "next": "^14.0.0",
+    "next": "14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^5.2.2",
-    "lucide-react": "^0.290.0",
-    "framer-motion": "^10.16.4"
+    "lucide-react": "^0.290.0"
   },
   "devDependencies": {
     "@types/node": "^20.8.0",
