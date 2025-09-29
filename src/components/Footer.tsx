@@ -2,6 +2,7 @@
 
 // Icons replaced with emoji/text
 import { personalInfo } from '@/data/personal'
+import { Linkedin, Github, Mail, Heart, ArrowUp } from 'lucide-react'
 
 export default function Footer() {
   const scrollToTop = () => {

@@ -2,6 +2,7 @@
 
 // Icons replaced with emoji/text
 import { experiences } from '@/data/personal'
+import { Calendar, MapPin, ExternalLink, CheckCircle } from 'lucide-react'
 
 export default function Experience() {
   return (
