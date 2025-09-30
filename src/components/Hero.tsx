@@ -18,7 +18,17 @@ export default function Hero() {
           {/* Profile Image */}
           <div className="mb-8 flex justify-center">
             <div className="w-40 h-40 rounded-full bg-gradient-to-r from-primary-500 to-blue-600 p-1 shadow-xl">
-              <div className="w-full h-full rounded-full bg-gray-200 flex items-center justify-center text-4xl font-bold text-gray-700">
+              <img
+                src={personalInfo.profileImage}
+                alt="Roberto Carlos Zapata"
+                className="w-full h-full rounded-full object-cover"
+                onError={(e) => {
+                  // Fallback a iniciales si la imagen no carga
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.nextElementSibling.style.display = 'flex';
+                }}
+              />
+              <div className="w-full h-full rounded-full bg-gray-200 flex items-center justify-center text-4xl font-bold text-gray-700" style={{display: 'none'}}>
                 RZ
               </div>
             </div>

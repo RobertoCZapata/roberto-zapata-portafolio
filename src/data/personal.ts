@@ -4,7 +4,7 @@ export const personalInfo: PersonalInfo = {
   fullName: "Roberto Carlos Zapata",
   title: "Senior Frontend Developer",
   summary: "Senior Frontend Developer con 6+ años de experiencia construyendo aplicaciones web escalables y de alto rendimiento. Especialista en React, Next.js, TypeScript y Testing automatizado. Actualmente desarrollando para TicketMaster en Globant con comunicación 100% en inglés.",
-  profileImage: "/images/profile.jpg",
+  profileImage: "https://i.imgur.com/F5nC8ln.jpg",
   contactInfo: {
     email: "robertozapataz25@gmail.com",
     phone: "+57 3102371684",
