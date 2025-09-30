@@ -25,7 +25,10 @@ export default function Hero() {
                 onError={(e) => {
                   // Fallback a iniciales si la imagen no carga
                   e.currentTarget.style.display = 'none';
-                  e.currentTarget.nextElementSibling.style.display = 'flex';
+const nextElement = e.currentTarget.nextElementSibling;
+                  if (nextElement instanceof HTMLElement) {
+                    nextElement.style.display = 'flex';
+                  }
                 }}
               />
               <div className="w-full h-full rounded-full bg-gray-200 flex items-center justify-center text-4xl font-bold text-gray-700" style={{display: 'none'}}>
