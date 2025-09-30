@@ -1,11 +1,16 @@
 'use client'
 
 import { useState } from 'react'
-// Icons replaced with emoji/text
 import { personalInfo } from '@/data/personal'
+import { useLanguage } from '@/context/LanguageContext'
+import { useTranslations } from '@/i18n/translations'
 import { Mail, Phone, MapPin, Linkedin, Github, ExternalLink, CheckCircle, Send } from 'lucide-react'
 
 export default function Contact() {
+  const { language } = useLanguage()
+  const t = useTranslations()
+  const info = personalInfo[language]
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,14 +21,11 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Simulate form submission
     setIsSubmitted(true)
     setTimeout(() => setIsSubmitted(false), 3000)
 
-    // Reset form
     setFormData({ name: '', email: '', subject: '', message: '' })
 
-    // In a real app, you would send the data to your backend
     console.log('Form submitted:', formData)
   }
 
@@ -38,23 +40,23 @@ export default function Contact() {
     {
       icon: Mail,
       label: 'Email',
-      value: personalInfo.contactInfo.email,
-      href: `mailto:${personalInfo.contactInfo.email}`,
-      description: 'Respondo en 24h'
+      value: info.contactInfo.email,
+      href: `mailto:${info.contactInfo.email}`,
+      description: t.contact.methods.emailDescription
     },
     {
       icon: Phone,
-      label: 'Teléfono',
-      value: personalInfo.contactInfo.phone,
-      href: `tel:${personalInfo.contactInfo.phone}`,
-      description: 'Lun-Vie 9AM-6PM'
+      label: language === 'es' ? 'Teléfono' : 'Phone',
+      value: info.contactInfo.phone,
+      href: `tel:${info.contactInfo.phone}`,
+      description: t.contact.methods.phoneDescription
     },
     {
       icon: MapPin,
-      label: 'Ubicación',
-      value: personalInfo.contactInfo.location,
+      label: language === 'es' ? 'Ubicación' : 'Location',
+      value: info.contactInfo.location,
       href: '#',
-      description: 'Disponible para remoto'
+      description: t.contact.methods.locationDescription
     }
   ]
 
@@ -62,32 +64,24 @@ export default function Contact() {
     {
       icon: Linkedin,
       label: 'LinkedIn',
-      href: personalInfo.contactInfo.linkedin,
+      href: info.contactInfo.linkedin,
       color: 'hover:text-blue-600'
     },
     {
       icon: Github,
       label: 'GitHub',
-      href: personalInfo.contactInfo.github,
+      href: info.contactInfo.github,
       color: 'hover:text-gray-900'
     },
     {
       icon: ExternalLink,
-      label: 'Portafolio',
-      href: personalInfo.contactInfo.website || '#',
+      label: language === 'es' ? 'Portafolio' : 'Portfolio',
+      href: info.contactInfo.website || '#',
       color: 'hover:text-primary-600'
     }
   ]
 
-  const projectTypes = [
-    'Desarrollo Frontend',
-    'Aplicación React/Next.js',
-    'Testing y QA',
-    'Consultoría Técnica',
-    'Migración de Proyectos',
-    'Optimización de Performance',
-    'Otro'
-  ]
+  const projectTypes = t.contact.projectTypes
 
   return (
     <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
@@ -95,10 +89,10 @@ export default function Contact() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Contacta Conmigo
+            {t.contact.title}
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            ¿Tienes un proyecto en mente? Conversemos sobre cómo puedo ayudarte
+            {t.contact.subtitle}
           </p>
         </div>
 
@@ -128,7 +122,7 @@ export default function Contact() {
 
             {/* Social Links */}
             <div className="border-t border-gray-200 pt-8">
-              <h3 className="font-semibold text-gray-900 mb-4">Sígueme en:</h3>
+              <h3 className="font-semibold text-gray-900 mb-4">{t.contact.socialHeading}</h3>
               <div className="flex space-x-4">
                 {socialLinks.map((social) => (
                   <a
@@ -149,23 +143,23 @@ export default function Contact() {
             <div className="bg-white rounded-xl p-6 shadow-lg">
               <div className="flex items-center mb-4">
                 <div className="w-3 h-3 bg-green-500 rounded-full mr-3 animate-pulse"></div>
-                <h3 className="font-semibold text-gray-900">Estado de Disponibilidad</h3>
+                <h3 className="font-semibold text-gray-900">{t.contact.availability.heading}</h3>
               </div>
               <p className="text-gray-600 mb-4">
-                Actualmente disponible para nuevos proyectos y colaboraciones.
+                {t.contact.availability.description}
               </p>
               <div className="space-y-2 text-sm text-gray-600">
                 <div className="flex justify-between">
-                  <span>Respuesta a emails:</span>
-                  <span className="text-green-600 font-medium">24 horas</span>
+                  <span>{t.contact.availability.responseTimeLabel}</span>
+                  <span className="text-green-600 font-medium">{t.contact.availability.responseTimeValue}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Disponibilidad para reuniones:</span>
-                  <span className="text-green-600 font-medium">Inmediata</span>
+                  <span>{t.contact.availability.meetingsLabel}</span>
+                  <span className="text-green-600 font-medium">{t.contact.availability.meetingsValue}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Inicio de proyectos:</span>
-                  <span className="text-green-600 font-medium">2-4 semanas</span>
+                  <span>{t.contact.availability.projectsLabel}</span>
+                  <span className="text-green-600 font-medium">{t.contact.availability.projectsValue}</span>
                 </div>
               </div>
             </div>
@@ -175,10 +169,10 @@ export default function Contact() {
           <div className="bg-white rounded-xl shadow-lg p-8">
             <div className="mb-6">
               <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                Envíame un Mensaje
+                {t.contact.form.title}
               </h3>
               <p className="text-gray-600">
-                Completa el formulario y me pondré en contacto contigo pronto
+                {t.contact.form.subtitle}
               </p>
             </div>
 
@@ -186,7 +180,7 @@ export default function Contact() {
               <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
                 <div className="flex items-center">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
-                  <span className="text-green-700">¡Mensaje enviado exitosamente!</span>
+                  <span className="text-green-700">{t.contact.form.successMessage}</span>
                 </div>
               </div>
             )}
@@ -196,7 +190,7 @@ export default function Contact() {
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    Nombre Completo *
+                    {t.contact.form.nameLabel}
                   </label>
                   <input
                     type="text"
@@ -206,12 +200,12 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                    placeholder="Tu nombre completo"
+                    placeholder={t.contact.form.namePlaceholder}
                   />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email *
+                    {t.contact.form.emailLabel}
                   </label>
                   <input
                     type="email"
@@ -221,7 +215,7 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
-                    placeholder="tu@email.com"
+                    placeholder={t.contact.form.emailPlaceholder}
                   />
                 </div>
               </div>
@@ -229,7 +223,7 @@ export default function Contact() {
               {/* Subject */}
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                  Tipo de Proyecto *
+                  {t.contact.form.projectTypeLabel}
                 </label>
                 <select
                   id="subject"
@@ -239,7 +233,7 @@ export default function Contact() {
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
                 >
-                  <option value="">Selecciona un tipo de proyecto</option>
+                  <option value="">{t.contact.form.projectTypePlaceholder}</option>
                   {projectTypes.map((type) => (
                     <option key={type} value={type}>
                       {type}
@@ -251,7 +245,7 @@ export default function Contact() {
               {/* Message */}
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                  Mensaje *
+                  {t.contact.form.messageLabel}
                 </label>
                 <textarea
                   id="message"
@@ -261,7 +255,7 @@ export default function Contact() {
                   value={formData.message}
                   onChange={handleChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors resize-none"
-                  placeholder="Cuéntame más sobre tu proyecto, timeline, presupuesto y cualquier detalle relevante..."
+                  placeholder={t.contact.form.messagePlaceholder}
                 />
               </div>
 
@@ -276,15 +270,16 @@ export default function Contact() {
                 ) : (
                   <Send className="w-5 h-5 mr-2" />
                 )}
-                {isSubmitted ? 'Mensaje Enviado' : 'Enviar Mensaje'}
+                {isSubmitted ? t.contact.form.submitted : t.contact.form.submit}
               </button>
             </form>
 
             {/* Additional Info */}
             <div className="mt-8 p-4 bg-gray-50 rounded-lg">
               <p className="text-sm text-gray-600 text-center">
-                <strong>Tiempo de respuesta promedio:</strong> 24 horas •
-                <strong className="ml-2">Consulta inicial:</strong> Gratuita
+                <strong>{t.contact.extraInfo.responseTime}</strong>
+                {' • '}
+                <strong className="ml-2">{t.contact.extraInfo.consultation}</strong> {t.contact.extraInfo.consultationValue}
               </p>
             </div>
           </div>

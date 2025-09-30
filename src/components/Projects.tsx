@@ -1,25 +1,30 @@
 'use client'
 
 import { useState } from 'react'
-import { Github, ExternalLink, CheckCircle } from 'lucide-react'
-// Icons replaced with emoji/text
 import { projects } from '@/data/personal'
+import { useLanguage } from '@/context/LanguageContext'
+import { useTranslations } from '@/i18n/translations'
+import { Github, ExternalLink, CheckCircle } from 'lucide-react'
 import type { Project } from '@/types'
 
 export default function Projects() {
+  const { language } = useLanguage()
+  const t = useTranslations()
+  const projectList = projects[language]
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
 
   const categories = [
-    { id: 'all', label: 'Todos', count: projects.length },
-    { id: 'web', label: 'Web Apps', count: projects.filter(p => p.category === 'web').length },
-    { id: 'tool', label: 'Herramientas', count: projects.filter(p => p.category === 'tool').length },
-    { id: 'api', label: 'APIs', count: projects.filter(p => p.category === 'api').length },
+    { id: 'all', label: t.projects.categories.all, count: projectList.length },
+    { id: 'web', label: t.projects.categories.web, count: projectList.filter((p) => p.category === 'web').length },
+    { id: 'tool', label: t.projects.categories.tool, count: projectList.filter((p) => p.category === 'tool').length },
+    { id: 'api', label: t.projects.categories.api, count: projectList.filter((p) => p.category === 'api').length },
   ]
 
-  const filteredProjects = selectedCategory === 'all'
-    ? projects
-    : projects.filter(project => project.category === selectedCategory)
+  const filteredProjects =
+    selectedCategory === 'all'
+      ? projectList
+      : projectList.filter((project) => project.category === selectedCategory)
 
   const getStatusColor = (status: Project['status']) => {
     switch (status) {
@@ -37,14 +42,18 @@ export default function Projects() {
   const getStatusLabel = (status: Project['status']) => {
     switch (status) {
       case 'completed':
-        return 'Completado'
+        return t.projects.status.completed
       case 'in-progress':
-        return 'En Progreso'
+        return t.projects.status.inProgress
       case 'planned':
-        return 'Planeado'
+        return t.projects.status.planned
       default:
-        return 'Desconocido'
+        return t.projects.status.unknown
     }
+  }
+
+  const formatExtraTechLabel = (count: number) => {
+    return language === 'es' ? `+${count} más` : `+${count} more`
   }
 
   return (
@@ -53,10 +62,10 @@ export default function Projects() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Proyectos Destacados
+            {t.projects.title}
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Una selección de proyectos que demuestran mi experiencia técnica y enfoque en la calidad
+            {t.projects.subtitle}
           </p>
         </div>
 
@@ -122,7 +131,7 @@ export default function Projects() {
                     ))}
                     {project.technologies.length > 3 && (
                       <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs font-medium">
-                        +{project.technologies.length - 3} más
+                        {formatExtraTechLabel(project.technologies.length - 3)}
                       </span>
                     )}
                   </div>
@@ -139,7 +148,7 @@ export default function Projects() {
                       onClick={(e) => e.stopPropagation()}
                     >
                       <Github className="w-4 h-4 mr-1" />
-                      <span className="text-sm">Código</span>
+                      <span className="text-sm">{t.projects.codeLabel}</span>
                     </a>
                   )}
                   {project.liveUrl && (
@@ -151,7 +160,7 @@ export default function Projects() {
                       onClick={(e) => e.stopPropagation()}
                     >
                       <ExternalLink className="w-4 h-4 mr-1" />
-                      <span className="text-sm">Demo</span>
+                      <span className="text-sm">{t.projects.demoLabel}</span>
                     </a>
                   )}
                 </div>
@@ -178,6 +187,7 @@ export default function Projects() {
                   <button
                     onClick={() => setSelectedProject(null)}
                     className="text-gray-400 hover:text-gray-600 text-2xl font-bold"
+                    aria-label={t.projects.modalClose}
                   >
                     ×
                   </button>
@@ -190,7 +200,7 @@ export default function Projects() {
 
                 {/* Features */}
                 <div className="mb-6">
-                  <h4 className="font-semibold text-gray-900 mb-3">Características principales:</h4>
+                  <h4 className="font-semibold text-gray-900 mb-3">{t.projects.featuresTitle}</h4>
                   <ul className="space-y-2">
                     {selectedProject.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start">
@@ -203,7 +213,7 @@ export default function Projects() {
 
                 {/* All Technologies */}
                 <div className="mb-6">
-                  <h4 className="font-semibold text-gray-900 mb-3">Stack Tecnológico:</h4>
+                  <h4 className="font-semibold text-gray-900 mb-3">{t.projects.stackTitle}</h4>
                   <div className="flex flex-wrap gap-2">
                     {selectedProject.technologies.map((tech) => (
                       <span
@@ -226,7 +236,7 @@ export default function Projects() {
                       className="inline-flex items-center px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition-colors"
                     >
                       <Github className="w-4 h-4 mr-2" />
-                      Ver Código
+                      {t.projects.viewCode}
                     </a>
                   )}
                   {selectedProject.liveUrl && (
@@ -237,7 +247,7 @@ export default function Projects() {
                       className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
                     >
                       <ExternalLink className="w-4 h-4 mr-2" />
-                      Ver Demo
+                      {t.projects.viewDemo}
                     </a>
                   )}
                 </div>

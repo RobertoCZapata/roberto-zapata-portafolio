@@ -1,25 +1,32 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { skills } from '@/data/personal'
+import { useLanguage } from '@/context/LanguageContext'
+import { useTranslations } from '@/i18n/translations'
 import type { Skill } from '@/types'
-// Icons replaced with emoji/text
 
 export default function Skills() {
+  const { language } = useLanguage()
+  const t = useTranslations()
+  const skillset = skills[language]
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
 
-  const categories = [
-    { id: 'all', label: 'Todas las Habilidades' },
-    { id: 'frontend', label: 'Frontend' },
-    { id: 'testing', label: 'Testing' },
-    { id: 'backend', label: 'Backend' },
-    { id: 'tools', label: 'Herramientas' },
-    { id: 'soft-skills', label: 'Habilidades Blandas' }
-  ]
+  const categories = useMemo(
+    () => [
+      { id: 'all', label: t.skills.categories.all },
+      { id: 'frontend', label: t.skills.categories.frontend },
+      { id: 'testing', label: t.skills.categories.testing },
+      { id: 'backend', label: t.skills.categories.backend },
+      { id: 'tools', label: t.skills.categories.tools },
+      { id: 'soft-skills', label: t.skills.categories.soft },
+    ],
+    [t]
+  )
 
   const filteredSkills = selectedCategory === 'all'
-    ? skills
-    : skills.filter(skill => skill.category === selectedCategory)
+    ? skillset
+    : skillset.filter(skill => skill.category === selectedCategory)
 
   const getLevelColor = (level: Skill['level']) => {
     switch (level) {
@@ -39,13 +46,13 @@ export default function Skills() {
   const getLevelText = (level: Skill['level']) => {
     switch (level) {
       case 'expert':
-        return 'Experto'
+        return t.skills.levelText.expert
       case 'advanced':
-        return 'Avanzado'
+        return t.skills.levelText.advanced
       case 'intermediate':
-        return 'Intermedio'
+        return t.skills.levelText.intermediate
       case 'beginner':
-        return 'Principiante'
+        return t.skills.levelText.beginner
       default:
         return 'N/A'
     }
@@ -85,7 +92,7 @@ export default function Skills() {
 
   const getCategoryStats = () => {
     const stats = categories.slice(1).map(category => {
-      const categorySkills = skills.filter(skill => skill.category === category.id)
+      const categorySkills = skillset.filter(skill => skill.category === category.id)
       const expertCount = categorySkills.filter(skill => skill.level === 'expert').length
       const advancedCount = categorySkills.filter(skill => skill.level === 'advanced').length
 
@@ -100,16 +107,24 @@ export default function Skills() {
     return stats
   }
 
+  const formatYears = (years?: number) => {
+    if (!years) return null
+    if (years === 1) {
+      return t.skills.yearsOfExperience.singular
+    }
+    return t.skills.yearsOfExperience.plural.replace('{years}', years.toString())
+  }
+
   return (
     <section id="skills" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Habilidades Técnicas
+            {t.skills.title}
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Mi stack tecnológico y competencias desarrolladas a lo largo de mi carrera
+            {t.skills.subtitle}
           </p>
         </div>
 
@@ -124,9 +139,9 @@ export default function Skills() {
               <h3 className="font-semibold text-gray-900 mb-2">{stat.label}</h3>
               <div className="text-2xl font-bold text-primary-600 mb-1">{stat.total}</div>
               <div className="text-sm text-gray-600">
-                {stat.expert > 0 && <span className="text-green-600">{stat.expert} experto</span>}
+                {stat.expert > 0 && <span className="text-green-600">{stat.expert} {t.skills.stats.expert}</span>}
                 {stat.expert > 0 && stat.advanced > 0 && <span> · </span>}
-                {stat.advanced > 0 && <span className="text-blue-600">{stat.advanced} avanzado</span>}
+                {stat.advanced > 0 && <span className="text-blue-600">{stat.advanced} {t.skills.stats.advanced}</span>}
               </div>
             </div>
           ))}
@@ -166,8 +181,8 @@ export default function Skills() {
                   )}
                   <div>
                     <h3 className="font-semibold text-gray-900">{skill.name}</h3>
-                    {skill.years && (
-                      <p className="text-sm text-gray-600">{skill.years} años de experiencia</p>
+                    {formatYears(skill.years) && (
+                      <p className="text-sm text-gray-600">{formatYears(skill.years)}</p>
                     )}
                   </div>
                 </div>
@@ -186,8 +201,8 @@ export default function Skills() {
                   ></div>
                 </div>
                 <div className="flex justify-between text-xs text-gray-500 mt-1">
-                  <span>Principiante</span>
-                  <span>Experto</span>
+                  <span>{t.skills.levelRange.min}</span>
+                  <span>{t.skills.levelRange.max}</span>
                 </div>
               </div>
             </div>
@@ -198,28 +213,18 @@ export default function Skills() {
         <div className="mt-16 bg-gradient-to-r from-primary-50 to-blue-50 rounded-2xl p-8">
           <div className="text-center">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              Certificaciones y Formación Continua
+              {t.skills.certificationsTitle}
             </h3>
             <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              Mantengo mis habilidades actualizadas con certificaciones oficiales y formación continua
+              {t.skills.certificationsSubtitle}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
-              <div className="bg-white rounded-lg p-4 shadow-sm">
-                <div className="font-semibold text-gray-900">🃏 Jest Testing</div>
-                <div className="text-gray-600">Framework de Testing</div>
-              </div>
-              <div className="bg-white rounded-lg p-4 shadow-sm">
-                <div className="font-semibold text-gray-900">🎭 Playwright</div>
-                <div className="text-gray-600">E2E Testing</div>
-              </div>
-              <div className="bg-white rounded-lg p-4 shadow-sm">
-                <div className="font-semibold text-gray-900">📊 Google Analytics 4</div>
-                <div className="text-gray-600">Web Analytics</div>
-              </div>
-              <div className="bg-white rounded-lg p-4 shadow-sm">
-                <div className="font-semibold text-gray-900">🏃 Scrum Master</div>
-                <div className="text-gray-600">Metodologías Ágiles</div>
-              </div>
+              {t.skills.certifications.map((item) => (
+                <div key={item.title} className="bg-white rounded-lg p-4 shadow-sm">
+                  <div className="font-semibold text-gray-900">{item.title}</div>
+                  <div className="text-gray-600">{item.description}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
