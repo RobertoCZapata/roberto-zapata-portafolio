@@ -6,8 +6,8 @@ export const personalInfo: PersonalInfo = {
   summary: "Senior Frontend Developer con 6+ años de experiencia construyendo aplicaciones web escalables y de alto rendimiento. Especialista en React, Next.js, TypeScript y Testing automatizado. Actualmente desarrollando para TicketMaster en Globant con comunicación 100% en inglés.",
   profileImage: "/images/profile.jpg",
   contactInfo: {
-    email: "roberto.zapata@email.com",
-    phone: "+57 300 123 4567",
+    email: "robertozapataz25@gmail.com",
+    phone: "+57 3102371684",
     location: "Bucaramanga, Santander, Colombia",
     website: "https://roberto-zapata.dev",
     linkedin: "https://linkedin.com/in/robertoczapata",
