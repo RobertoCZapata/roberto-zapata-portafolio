@@ -116,14 +116,14 @@ export default function Skills() {
   }
 
   return (
-    <section id="skills" className="py-20 bg-white">
+    <section id="skills" className="py-20 bg-white dark:bg-dark-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-dark-text-primary mb-4">
             {t.skills.title}
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-dark-text-secondary max-w-2xl mx-auto">
             {t.skills.subtitle}
           </p>
         </div>
@@ -133,30 +133,30 @@ export default function Skills() {
           {getCategoryStats().map((stat) => (
             <div
               key={stat.id}
-              className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300"
+              className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 rounded-xl p-6 text-center hover:shadow-lg dark:shadow-gray-900/50 transition-all duration-300"
             >
               <div className="text-3xl mb-2">{stat.icon}</div>
-              <h3 className="font-semibold text-gray-900 mb-2">{stat.label}</h3>
-              <div className="text-2xl font-bold text-primary-600 mb-1">{stat.total}</div>
-              <div className="text-sm text-gray-600">
-                {stat.expert > 0 && <span className="text-green-600">{stat.expert} {t.skills.stats.expert}</span>}
+              <h3 className="font-semibold text-gray-900 dark:text-dark-text-primary mb-2">{stat.label}</h3>
+              <div className="text-2xl font-bold text-primary-600 dark:text-primary-400 mb-1">{stat.total}</div>
+              <div className="text-sm text-gray-600 dark:text-dark-text-secondary">
+                {stat.expert > 0 && <span className="text-green-600 dark:text-green-400">{stat.expert} {t.skills.stats.expert}</span>}
                 {stat.expert > 0 && stat.advanced > 0 && <span> · </span>}
-                {stat.advanced > 0 && <span className="text-blue-600">{stat.advanced} {t.skills.stats.advanced}</span>}
+                {stat.advanced > 0 && <span className="text-blue-600 dark:text-blue-400">{stat.advanced} {t.skills.stats.advanced}</span>}
               </div>
             </div>
           ))}
         </div>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center items-center gap-4 mb-12">
           {categories.map((category) => (
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 text-center ${
                 selectedCategory === category.id
-                  ? 'bg-primary-600 text-white shadow-lg'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-primary-600 dark:bg-primary-500 text-white shadow-lg'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               {category.id !== 'all' && (
@@ -168,61 +168,44 @@ export default function Skills() {
         </div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {filteredSkills.map((skill, index) => (
             <div
               key={`${skill.name}-${index}`}
-              className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300"
+              className="bg-white dark:bg-dark-surface border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-lg dark:shadow-gray-900/50 hover:border-primary-500 dark:hover:border-primary-400 transition-all duration-300 group"
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center">
-                  {skill.icon && (
-                    <span className="text-2xl mr-3">{skill.icon}</span>
-                  )}
-                  <div>
-                    <h3 className="font-semibold text-gray-900">{skill.name}</h3>
-                    {formatYears(skill.years) && (
-                      <p className="text-sm text-gray-600">{formatYears(skill.years)}</p>
-                    )}
-                  </div>
-                </div>
+              <div className="flex flex-col items-center text-center">
+                {skill.icon && (
+                  <span className="text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">{skill.icon}</span>
+                )}
+                <h3 className="font-semibold text-gray-900 dark:text-dark-text-primary text-sm mb-2">{skill.name}</h3>
                 <span
-                  className={`px-3 py-1 rounded-full text-xs font-medium text-white ${getLevelColor(skill.level)}`}
+                  className={`px-2 py-1 rounded-full text-xs font-medium text-white ${getLevelColor(skill.level)} mb-1`}
                 >
                   {getLevelText(skill.level)}
                 </span>
-              </div>
-
-              {/* Skill Level Bar */}
-              <div className="relative">
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className={`h-2 rounded-full transition-all duration-500 ${getLevelColor(skill.level)} ${getLevelWidth(skill.level)}`}
-                  ></div>
-                </div>
-                <div className="flex justify-between text-xs text-gray-500 mt-1">
-                  <span>{t.skills.levelRange.min}</span>
-                  <span>{t.skills.levelRange.max}</span>
-                </div>
+                {formatYears(skill.years) && (
+                  <p className="text-xs text-gray-600 dark:text-dark-text-secondary">{formatYears(skill.years)}</p>
+                )}
               </div>
             </div>
           ))}
         </div>
 
         {/* Certifications Preview */}
-        <div className="mt-16 bg-gradient-to-r from-primary-50 to-blue-50 rounded-2xl p-8">
+        <div className="mt-16 bg-gradient-to-r from-primary-50 to-blue-50 dark:from-primary-900/20 dark:to-blue-900/20 rounded-2xl p-8">
           <div className="text-center">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-dark-text-primary mb-4">
               {t.skills.certificationsTitle}
             </h3>
-            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            <p className="text-gray-600 dark:text-dark-text-secondary mb-6 max-w-2xl mx-auto">
               {t.skills.certificationsSubtitle}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
               {t.skills.certifications.map((item) => (
-                <div key={item.title} className="bg-white rounded-lg p-4 shadow-sm">
-                  <div className="font-semibold text-gray-900">{item.title}</div>
-                  <div className="text-gray-600">{item.description}</div>
+                <div key={item.title} className="bg-white dark:bg-dark-surface rounded-lg p-4 shadow-sm dark:shadow-gray-900/50">
+                  <div className="font-semibold text-gray-900 dark:text-dark-text-primary">{item.title}</div>
+                  <div className="text-gray-600 dark:text-dark-text-secondary">{item.description}</div>
                 </div>
               ))}
             </div>

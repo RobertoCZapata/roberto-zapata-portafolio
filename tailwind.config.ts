@@ -6,6 +6,7 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class', // Enable dark mode with class strategy
   theme: {
     extend: {
       colors: {
@@ -32,6 +33,18 @@ const config: Config = {
           700: '#334155',
           800: '#1e293b',
           900: '#0f172a',
+        },
+        dark: {
+          bg: '#0f172a',
+          surface: '#1e293b',
+          card: '#1e293b',
+          border: '#334155',
+          hover: '#334155',
+          text: {
+            primary: '#f1f5f9',
+            secondary: '#94a3b8',
+            muted: '#64748b',
+          }
         }
       },
       fontFamily: {

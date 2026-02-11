@@ -177,6 +177,7 @@ export const projects: Localized<Project[]> = {
       status: 'completed',
       category: 'web',
       githubUrl: 'https://github.com/ticketmaster/testing-migration',
+      featured: true,
     },
     {
       id: 'ga4-integration',
@@ -231,6 +232,7 @@ export const projects: Localized<Project[]> = {
       status: 'completed',
       category: 'web',
       githubUrl: 'https://github.com/ticketmaster/testing-migration',
+      featured: true,
     },
     {
       id: 'ga4-integration',

@@ -31,7 +31,7 @@ export default function Footer() {
   const [builtWithBeforeHeart, builtWithAfterHeart = ''] = builtWithText.split('❤️')
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-gray-900 dark:bg-gray-950 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -39,8 +39,8 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="mb-6">
               <h3 className="text-2xl font-bold mb-2">{info.fullName}</h3>
-              <p className="text-gray-400 text-lg mb-4">{t.footer.role}</p>
-              <p className="text-gray-300 leading-relaxed max-w-md">
+              <p className="text-gray-400 dark:text-gray-500 text-lg mb-4">{t.footer.role}</p>
+              <p className="text-gray-300 dark:text-gray-400 leading-relaxed max-w-md">
                 {t.footer.about}
               </p>
             </div>
@@ -51,7 +51,7 @@ export default function Footer() {
                 href={info.contactInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 bg-gray-800 rounded-lg hover:bg-blue-600 transition-all duration-300 hover:-translate-y-1"
+                className="p-3 bg-gray-800 dark:bg-gray-900 rounded-lg hover:bg-blue-600 dark:hover:bg-blue-700 transition-all duration-300 hover:-translate-y-1"
                 aria-label="LinkedIn Profile"
               >
                 <Linkedin className="w-5 h-5" />
@@ -60,14 +60,14 @@ export default function Footer() {
                 href={info.contactInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-all duration-300 hover:-translate-y-1"
+                className="p-3 bg-gray-800 dark:bg-gray-900 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-800 transition-all duration-300 hover:-translate-y-1"
                 aria-label="GitHub Profile"
               >
                 <Github className="w-5 h-5" />
               </a>
               <a
                 href={`mailto:${info.contactInfo.email}`}
-                className="p-3 bg-gray-800 rounded-lg hover:bg-red-600 transition-all duration-300 hover:-translate-y-1"
+                className="p-3 bg-gray-800 dark:bg-gray-900 rounded-lg hover:bg-red-600 dark:hover:bg-red-700 transition-all duration-300 hover:-translate-y-1"
                 aria-label="Email Contact"
               >
                 <Mail className="w-5 h-5" />
@@ -83,7 +83,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center group"
+                    className="text-gray-400 dark:text-gray-500 hover:text-white transition-colors duration-300 flex items-center group"
                   >
                     <span className="group-hover:translate-x-1 transition-transform duration-300">
                       {link.label}
@@ -94,7 +94,7 @@ export default function Footer() {
               <li>
                 <button
                   onClick={handlePrint}
-                className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center group"
+                className="text-gray-400 dark:text-gray-500 hover:text-white transition-colors duration-300 flex items-center group"
                 >
                   <span className="group-hover:translate-x-1 transition-transform duration-300">
                     {t.footer.downloadCv}
@@ -109,8 +109,8 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-6">{t.footer.stackTitle}</h4>
             <div className="space-y-3">
               {technologies.map((tech) => (
-                <div key={tech} className="flex items-center text-gray-400">
-                  <div className="w-2 h-2 bg-primary-500 rounded-full mr-3"></div>
+                <div key={tech} className="flex items-center text-gray-400 dark:text-gray-500">
+                  <div className="w-2 h-2 bg-primary-500 dark:bg-primary-400 rounded-full mr-3"></div>
                   <span className="hover:text-white transition-colors duration-300">
                     {tech}
                   </span>
@@ -119,12 +119,12 @@ export default function Footer() {
             </div>
 
             {/* Current Status */}
-            <div className="mt-8 p-4 bg-gray-800 rounded-lg">
+            <div className="mt-8 p-4 bg-gray-800 dark:bg-gray-900 rounded-lg">
               <div className="flex items-center mb-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
+                <div className="w-2 h-2 bg-green-500 dark:bg-green-400 rounded-full mr-2 animate-pulse"></div>
                 <span className="text-sm font-medium">{t.footer.currentStatusTitle}</span>
               </div>
-              <p className="text-gray-400 text-sm">
+              <p className="text-gray-400 dark:text-gray-500 text-sm">
                 {t.footer.currentStatus}
               </p>
               <p className="text-green-400 text-sm mt-1">
@@ -135,19 +135,19 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 py-6">
+        <div className="border-t border-gray-800 dark:border-gray-900 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             {/* Copyright */}
-            <div className="flex items-center text-gray-400 text-sm mb-4 md:mb-0">
+            <div className="flex items-center text-gray-400 dark:text-gray-500 text-sm mb-4 md:mb-0">
               <span>{builtWithBeforeHeart.trim()}</span>
-              <Heart className="w-4 h-4 mx-1 text-red-500" />
+              <Heart className="w-4 h-4 mx-1 text-red-500 dark:text-red-400" />
               <span>{builtWithAfterHeart.trim()}</span>
             </div>
 
             {/* Back to Top */}
             <button
               onClick={scrollToTop}
-              className="flex items-center text-gray-400 hover:text-white transition-colors duration-300 group"
+              className="flex items-center text-gray-400 dark:text-gray-500 hover:text-white transition-colors duration-300 group"
             >
               <span className="mr-2 text-sm">{t.footer.backToTop}</span>
               <ArrowUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform duration-300" />
@@ -156,13 +156,13 @@ export default function Footer() {
         </div>
 
         {/* Additional Footer Info */}
-        <div className="border-t border-gray-800 py-4">
-          <div className="text-center text-xs text-gray-500">
+        <div className="border-t border-gray-800 dark:border-gray-900 py-4">
+          <div className="text-center text-xs text-gray-500 dark:text-gray-600">
             <p className="mb-2">
               {t.footer.developedWith}
             </p>
             <p>
-              <a href="https://github.com/robertozapata/portfolio" className="hover:text-gray-300">
+              <a href="https://github.com/robertozapata/portfolio" className="hover:text-gray-300 dark:hover:text-gray-400">
                 {t.footer.viewSource}
               </a>
             </p>

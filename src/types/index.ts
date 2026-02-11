@@ -25,6 +25,7 @@ export interface Project {
   imageUrl?: string;
   status: 'completed' | 'in-progress' | 'planned';
   category: 'web' | 'mobile' | 'api' | 'tool' | 'library';
+  featured?: boolean;
 }
 
 export interface Skill {
